@@ -151,12 +151,7 @@ http.createServer((req,res, err) => {
                             map_marcas_modelos[m['marca']] = {}
 
                             modelos_da_marca.forEach(mo => {
-
-                                if (m['marca'][mo['modelo']] in map_marcas_modelos)
-                                    map_marcas_modelos[m['marca']][mo['modelo']]++;
-                                else 
-                                    map_marcas_modelos[m['marca']][mo['modelo']] = 1
-
+                                    map_marcas_modelos[m['marca']][mo['modelo']] = mo['quantidade']
                             })
 
                             map_marcas[m['marca']] = m['quantidade']
@@ -194,12 +189,7 @@ http.createServer((req,res, err) => {
                             map_marcas_modelos[m['marca']] = {}
 
                             modelos_da_marca.forEach(mo => {
-
-                                if (m['marca'][mo['modelo']] in map_marcas_modelos)
-                                    map_marcas_modelos[m['marca']][mo['modelo']]++;
-                                else
-                                    map_marcas_modelos[m['marca']][mo['modelo']] = 1
-
+				map_marcas_modelos[m['marca']][mo['modelo']] = mo['quantidade']
                             })
 
                             map_marcas[m['marca']] = m['quantidade']
