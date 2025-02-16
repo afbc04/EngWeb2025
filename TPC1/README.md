@@ -2,9 +2,15 @@
 
 **Titulo :** TPC1 da UC Engenharia Web  
 **Data :** 2025-02-13  
+**UC :** Engenharia Web
+**Curso :** Licenciatura de Engenharia Informática 3º ano 2º semestre  
 **Autor :**  
 - **Nome :** André Filipe Barros Campos  
-- **ID :** a104618  
+- **Número de aluno :** a104618  
+- **Email Institucional :** a104618@alunos.uminho.pt  
+- **Email Pessoal :** andrefbc2004@gmail.com  
+ 
+![Imagem](image.png)
 
 ## Resumo
 
