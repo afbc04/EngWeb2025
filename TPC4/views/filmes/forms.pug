@@ -1,0 +1,28 @@
+extends ../layout 
+
+block content
+
+    .w3-card-4 
+        header.w3-container.w3-teal 
+            h2 Adicionar Filme 
+
+        a(href="/filmes" class="w3-button w3-gray") Voltar 
+        form.w3-container(method="POST")
+            fieldset 
+                legend Dados 
+                label Titulo 
+                input.w3-input.w3-round(type="text" name="id" required)
+                label Ano 
+                input.w3-input.w3-round(type="number" name="ano" required)
+                label Elenco 
+                ul
+                    il 
+                        input.w3-input.w3-round(type="text" name="atores1" required)
+                    il 
+                        input.w3-input.w3-round(type="text" name="atores2" required)
+                    il 
+                        input.w3-input.w3-round(type="text" name="atores3" required)
+                label Genero 
+                input.w3-input.w3-round(type="text" name="genero" required)
+            br
+            button.w3-btn.w3-gray.w3-mb-2(type="submit") Registar

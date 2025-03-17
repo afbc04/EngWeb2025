@@ -1,0 +1,28 @@
+extends ../layout 
+
+block content
+
+    .w3-card-4 
+        header.w3-container.w3-light-blue 
+            h2 Editar Filme 
+
+        a(href="/filmes" class="w3-button w3-gray") Voltar 
+        form.w3-container(method="POST")
+            fieldset 
+                legend Dados 
+                label Titulo 
+                input.w3-input.w3-round(type="text" name="id" readonly value=filme.id)
+                label Ano 
+                input.w3-input.w3-round(type="number" name="ano" value=filme.ano)
+                label Elenco 
+                ul
+                    each a in filme.atores 
+                        il 
+                            input.w3-input.w3-round(type="text" name="atores" value=a)
+                label Género 
+                ul
+                    each g in filme.genero 
+                        il 
+                            input.w3-input.w3-round(type="text" name="genero" value=g)
+            br
+            button.w3-btn.w3-teal.w3-mb-2(type="submit") Editar

@@ -1,0 +1,48 @@
+extends ../layout 
+
+block content 
+
+    .w3-card-4 
+        header.w3-container.w3-indigo 
+            h1 Lista de Filmes 
+
+        if tipo == 2
+            header.w3-container.w3-light-blue
+                h3 Filme "#{filme_id}" foi editado
+
+        if tipo == 3
+            header.w3-container.w3-red
+                h3 Filme "#{filme_id}" foi removido
+
+        header.w3-container.w3-white 
+            h6 
+        
+        .w3-container 
+            a(href="/" class="w3-button w3-gray") Voltar 
+            a(href="/filmes" class="w3-btn w3-ripple w3-round w3-teal") Adicionar Filme 
+            table.w3-table-all 
+                tr
+                    th Titulo 
+                    th Ano 
+                    th Elenco 
+                    th Género 
+                    th Ações 
+                each f in filmes 
+                    tr 
+                        td
+                            a(href="/filmes/" + f.id) #{f.id} 
+                        td= f.ano
+                        td
+                            ul.w3-ul 
+                                each a in f.atores
+                                    li
+                                        a(href="/atores/" + a) #{a}
+                        td
+                            ul.w3-ul 
+                                each g in f.genero
+                                    li #{g}
+                        td
+                            a(href="/filmes/edit/" + f.id)
+                                i.fa.fa-edit
+                            a(href="/filmes/delete/" + f.id)
+                                i.fa.fa-trash
