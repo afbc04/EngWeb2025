@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/w3.css')
+    link(rel='icon', href='/images/favicon.png')
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css")
+  body
+    h1
+      b Ocorreu um erro:
+    h2= message
+    h3= error.status
+    pre #{error.stack}
+
+  footer.w3-container.w3-pink
+    h5 EngWeb2025 - TPC5 - a104618 #{data} 

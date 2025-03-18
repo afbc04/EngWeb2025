@@ -1,0 +1,4 @@
+POSTMAN
+
+
+params -> query string
