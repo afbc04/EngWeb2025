@@ -4,7 +4,9 @@ sudo docker cp <nome_do_ficheiro> <nome_docker>:<pasta_do_docker>
 
 # Abrir o docker
 
-docker exec -it <nome_docker> sh
+sudo docker start <nome_docker>
+_(sudo docker ps)_ 
+sudo docker exec -it <nome_docker> sh
 
 # Dentro do docker
 

@@ -10,27 +10,57 @@
 
 ![Fotografia do Aluno](../image.png)
 
-## Resumo
+## Resumo do TPC
 
-1. Usaremos o dataset, num ficheiro csv, _[alunos.csv](alunos.csv)_ para o nosso servidor, onde nele contem entradas de **alunos**, onde nelas encontra-se o ID, nome e o _link do github_ de cada aluno  
-2. Deveremos ter um **json-server** que deverá usar este dataset para servir como base de dados do serviço que vamos fornecer.  
+1. Usaremos o dataset, num ficheiro csv, para o nosso servidor, onde nele contem entradas de **alunos**, onde nelas encontra-se o ID, nome e o _link do github_ de cada aluno  
+2. Deveremos ter um **servidor em mongoDB** que deverá usar este dataset para servir como base de dados do serviço que vamos fornecer.  
 3. Devemos criar um **servidor** em _Java Script_ onde este servidor irá buscar os pedidos dos clientes e responder-lhes.  
 4. Os pedidos serão efetuados por **HTTP** onde iremos usar o **url** para identificar o que o cliente deseja.  
 5. O servidor usará o json-server para buscar as informações na base de dados e depois irá apresentar a informação ao cliente.  
-6. O servidor deverá ter uma **página inicial**, contendo _links_, que listará os **alunos** nesta Escola.  
-7. Na lista de alunos, o cliente poderá usar _Queries String_ ou clicar numa entrada, onde será apresentado apenas essa entrada com o seu **id** como título.  
-8. Neste TPC, para além de obter entradas de alunos, teremos as opções de inserir, atualizar ou eliminar entradas de alunos.  
+6. O servidor deverá ter uma **página de alunos** que listará os **alunos** nesta Escola.  
+7. Na lista de alunos, o cliente poderá clicar numa entrada, onde será apresentado apenas essa entrada com o seu **id** como título.
+8. Neste TPC deveremos usar **EXPRESS** e templates **PUG** para frontend dos alunos. Este frontend deverá suportar as operações **CRUD :**  
+    - **Create :** inserir dados
+    - **Retrieve :** consultar/listar dados
+    - **Update :** atualizar dados
+    - **Delete :** apagar dados
+8. A novidade deste TPC é que usaremos **MongoDB** num docker em vez de json-server.
 
-## Lista de Resultados
+## Procedimentos para a resolução deste TPC
 
-1. Para criar o json-server, devo converter o ficheiro csv [alunos.csv](alunos.csv) num ficheiro JSON. Para este efeito, utilizo o website **[csvjson.com](https://csvjson.com/csv2json)** para converter o ficheiro CSV em JSON e altero o ficheiro JSON resultante para que este seja utilizado pelo json-server.  
-2. Após obter o dataset **[db.json](db.json)**, criei o json-server onde irei usar a porta **3000** para me comunicar com ele.  
-3. Para a criação do servidor, criei o ficheiro _[server.js](server.js)_ onde estou a usar a porta **7777** onde os clientes irão se comunicar com ele.  
-4. Nesse servidor, apenas os métodos _HTTP_ **GET** e **POST** estão implementados, fazendo com que qualquer outro método dará o erro **501**, indicando que não foi implementado.  
-5. Dentro dos métodos, existem possíveis _URLs_ que serão atendidas:  
+Para a realização deste TPC foi necessário configurar 3 servidores diferentes: 
+- MongoDB
+- API
+- Interface Web
+
+### MongoDB
+
+1. Para a criação do **mongoDB**, criei um volume em **docker** na aula teórica e vou usar essa, cujo nome é **mongoEW**  
+2. A conversão do ficheiro csv de alunos para ficheiro json já foi realizada no TPC anterior:
+    - **[TPC Base : TPC3](../TPC3/)**
+    - [Ficheiro csv dos alunos](../TPC3/alunos.csv)
+    - [Ficheiro json dos alunos](../TPC3/db.json)
+3. Para que o json fosse legível para mongoDB, fiz alterações no ficheiro json, fazendo com que o mesmo fosse uma única lista formada de alunos. Ficheiro resultante é **[database/alunos.json](apiAlunos/database/alunos.json)**  
+4. Após isso, importei o ficheiro para o docker e criei a base de dados **EW2025**, onde nela encontra-se a coleção **alunos**, coleção que foi criada com base no [ficheiro json](apiAlunos/database/alunos.json) mencionada anteriormente. Um passo-a-passo para me auxiliar na realização destes procedimentos encontra-se no ficheiro [openServer.md](apiAlunos/openServer.md)
+
+### API
+
+1. Para a criação da **API**, usei o **Express** para criar o servidor que irá suportar as operações CRUD dos alunos registados na base de dados em MongoDB.
+2. Este servidor encontra-se na diretoria [apiAlunos](apiAlunos/), configurei-o para que use a porta **3000** e que usasse o router **alunos**.
+3. No servidor API, temos 3 principais componentes:
+    - **Model :** representa os dados na base de dados, valida-os, define-os e interage com a base de dados em MongoDB. O model encontra-se em [apiAlunos/models](apiAlunos/models/aluno.js)
+    - **Controller :** contém a lógica de como as operações CRUD serão realizadas na base de dados, usando o model. O controller encontra-se em [apiAlunos/controllers](apiAlunos/controllers/aluno.js)
+    - **Routes :** mapeiam quais operações CRUD terão que ser realizadas com base na **URL** e no método **HTTP**. O router encontra-se em [apiAlunos/routes](apiAlunos/routes/alunos.js)
+4. A lógica deste servidor de Rest API inicia-se no ficheiro [apiAlunos/app.js](apiAlunos/app.js)
+
+### Interface Web
+
+1. Para a criação do servidor usei o **express-generator** com views em **PUG**. O servidor inicia-se no ficheiro **[app.js](app.js)** e uso a porta **7777**.
+2. Nesse servidor, apenas os métodos _HTTP_ **GET** e **POST** estão implementados, fazendo com que qualquer outro método dará o erro **500**.  
+3. Dentro dos métodos, existem possíveis _URLs_ que serão atendidas:  
     - **GET :**
-        1. **/** : Página Inicial que apenas tem uma entrada para a página de alunos  
-        2. **/alunos** : Página que lista todos os alunos. Este método aceita _Query Strings_.  
+        1. **/** : Redireciono para a página **/alunos**, pois é a única coleção no servidor. 
+        2. **/alunos** : Página que lista todos os alunos.  
         3. **/alunos/:id** : Página que apresenta as informações de um único aluno cujo ID é _:id_.  
         4. **/alunos/registo** : Página que contém um formulário onde é possivel criar um novo aluno  
         5. **/alunos/edit/:id** : Página que contém um formuĺario onde é possivel alterar as informações do aluno cujo ID é _:id_  
@@ -38,18 +68,29 @@
     - **POST :**
         1. **/alunos/registo** : Como o URL é _/alunos/registo_, então significa que devo adicionar o aluno com base nos dados recebidos pelo pacote **HTTP** enviado pelo Cliente  
         2. **/alunos/edit/:id** : Como o URL é _/alunos/edit/:id_, então significa que devo alterar os dados do aluno cujo ID é _:id_ com base nos dados recebidos pelo pacote **HTTP** enviado pelo Cliente.  
-    - Caso o cliente utilize outros métodos ou URLs não reconhecidas, então envio ao cliente mensagens com o _status code_ 501 ou 404, respetivamente, indicando que esses métodos não estão disponíveis ou URL não existe.    
-6. O servidor utiliza o ficheiro **[static.js](static.js)** para tratar de pedidos estáticos, ou seja, imagens ([favicon.png](public/favicon.png) e [student.png](public/student.png)) ou ficheiros [CSS](public/w3.css).  
-7. O servidor também utiliza o ficheiro **[templates.js](templates.json)**, ficheiro este que dado certos argumentos, cria automáticamente páginas HTML e pacotes HTTP que serão usados para responder aos clientes.  
+    - Caso o cliente utilize outros métodos ou URLs não reconhecidas, então envio ao cliente mensagens com o _status code_ 500 ou 404, respetivamente, indicando que esses métodos não são atendidos ou URL não existe.  
+4. O Express trata automáticamente dos pedidos estáticos, ou seja, imagens ([favicon.png](public/images/favicon.png)) ou ficheiros [CSS](public/stylesheets/w3.css).  
+5. As templates para os ficheiros HTML são feitas via **PUG**, templates estes que se encontram na pasta [views/](views/). Fiz template [layout](views/layout.pug) que será usada pelos outros templates, fiz template [error](views/error.pug) que apresenta unicamente erros e refiz todas as templates no [ficheiro JavaScript de templates](../TPC3/templates.js) em PUG.
+6. Por fim, usei **Routers** para definir o que o servidor deve fazer com base na **URL** e no método **HTTP** _(foi definido acima)_, onde uso:
+    - **alunos :** para definir as URLs começadas com **/alunos/**. Ficheiro chama-se [alunos.js](routes/alunos.js)
+    - **index :** para definir as URLs começadas com **/**. Ficheiro chama-se [index.js](routes/index.js), mas como dito acima, apenas é usado para redirecionar o cliente para a página /alunos
 
 ## Exemplos de Uso
 
-1. **Criar json-server :** json-server -w db.json  
-2. **Abrir servidor :** node server.js  
-3. **Ver página inicial :** http://localhost:7777  
-4. **Ver página dos alunos :** http://localhost:7777/alunos  
-5. **Ver página do aluno A100893 :** http://localhost:7777/alunos/A100893
-6. **Ver página com todos os alunos que contém a palavra "IA" no nome ordenados alfabéticamente de forma decrescente :** http://localhost:7777/alunos?nome_like=IA&_sort=nome&_order=desc
-7. **Ver página para registar um novo aluno :** http://localhost:7777/alunos/registo  
-8. **Ver página para editar o aluno A100893 :** http://localhost:7777/alunos/edit/A100893  
-9. **Ver página dos alunos após eliminar o aluno A100893 :** http://localhost:7777/alunos/delete/A100893
+Aqui estão exemplos de como usar o servidor web
+
+### API
+
+1. **Abrir docker :** sudo docker start mongoEW
+2. **Iniciar servidor :** npm start  
+
+_**Nota :** Toda a API está na diretoria apiAlunos/_  
+
+### Interface Web
+
+1. **Abrir servidor :** npm start 
+2. **Ver página dos alunos :** http://localhost:7777/alunos  
+3. **Ver página do aluno A100893 :** http://localhost:7777/alunos/A100893
+4. **Ver página para registar um novo aluno :** http://localhost:7777/alunos/registo  
+5. **Ver página para editar o aluno A100893 :** http://localhost:7777/alunos/edit/A100893  
+6. **Ver página dos alunos após eliminar o aluno A100893 :** http://localhost:7777/alunos/delete/A100893
