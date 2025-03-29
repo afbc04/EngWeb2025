@@ -8,6 +8,8 @@
 - **Nome :** André Filipe Barros Campos  
 - **Número de aluno :** a104618  
 
+![Fotografia do Aluno](../image.png)
+
 ## Resumo
 
 1. Usaremos o dataset _[db.json](dataset/db.json)_ para o nosso servidor, onde nele contem:  

@@ -1,1 +1,0 @@
-para converter de csv para json, eu usei o site "https://csvjson.com/csv2json"

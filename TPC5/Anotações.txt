@@ -1,4 +1,0 @@
-POSTMAN
-
-
-params -> query string

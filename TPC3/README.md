@@ -8,6 +8,8 @@
 - **Nome :** André Filipe Barros Campos  
 - **Número de aluno :** a104618  
 
+![Fotografia do Aluno](../image.png)
+
 ## Resumo
 
 1. Usaremos o dataset, num ficheiro csv, _[alunos.csv](alunos.csv)_ para o nosso servidor, onde nele contem entradas de **alunos**, onde nelas encontra-se o ID, nome e o _link do github_ de cada aluno  

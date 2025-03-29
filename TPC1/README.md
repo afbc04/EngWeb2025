@@ -10,7 +10,7 @@
 - **Email Institucional :** a104618@alunos.uminho.pt  
 - **Email Pessoal :** andrefbc2004@gmail.com  
  
-![Imagem](image.png)
+![Fotografia do Aluno](../image.png)
 
 ## Resumo
 

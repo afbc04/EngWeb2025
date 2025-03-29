@@ -8,11 +8,18 @@
  - **Email Institucional :** a104618@alunos.uminho.pt  
  - **Email Pessoal :** andrefbc2004@gmail.com  
  
- ![Imagem](image.png)
+ ![Fotografia do Aluno](image.png)
 
 ## Resumo
 
  Este repositório tem o propósito de ser o repositório do aluno _"André Filipe Barros Campos"_.  
  Repositório este onde terá os TPCs deste aluno em relação à UC **Engenharia Web 2024/2025**
 
+## Lista de TPCs
 
+- [**TPC1** _(2025-02-13)_](TPC1/)
+- [**TPC2** _(2025-02-22)_](TPC2/)
+- [**TPC3** _(2025-03-09)_](TPC3/)
+- [**TPC4** _(2025-03-16)_](TPC4/)
+- [**TPC5** _(2025-03-18)_](TPC5/)
+- [**TPC6** _(2025-03-29)_](TPC6/)
