@@ -5,7 +5,7 @@ var contratosSchema = new mongoose.Schema({
     _id : Number,
     nAnuncio : String,
     tipoprocedimento : String,
-    objetoContrato : String,
+    objectoContrato : String,
     dataPublicacao : String,
     dataCelebracaoContrato : String,
     precoContratual : Number,
