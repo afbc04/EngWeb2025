@@ -1,0 +1,108 @@
+extends layout 
+
+block content 
+    .w3-card-4 
+        header.w3-container.w3-indigo
+            h1 Livro #{livro._id}
+
+        .w3-container 
+            a.w3-button.w3-gray(href="/") Voltar
+
+            ul.w3-ul.w3-card-4(style="width:50%")
+
+                li 
+                    img(src=livro.coverImg)
+                li 
+                    b ID: 
+                    | #{livro._id}
+                li 
+                    b Titulo: 
+                    | #{livro.title}
+                li 
+                    b Series: 
+                    | #{livro.series}
+                li 
+                    b Autor: 
+                    | #{livro.author}
+                li 
+                    b Avaliação: 
+                    | #{livro.rating}
+                li 
+                    b Número de Avaliações: 
+                    | #{livro.numRatings}
+                li 
+                    b Descrição: 
+                    | #{livro.description}
+                li 
+                    b Idioma: 
+                    | #{livro.language}
+                li 
+                    b ISBN: 
+                    | #{livro.isbn}
+                li 
+                    b Formato do livro: 
+                    | #{livro.bookFormat}
+                li 
+                    b Edição: 
+                    | #{livro.edition}
+                li 
+                    b Número de Páginas: 
+                    | #{livro.pages}
+                li 
+                    b Publicador: 
+                    | #{livro.publisher}
+                li 
+                    b Data de Publicação: 
+                    | #{livro.publishDate}
+                li 
+                    b Data de Inauguração: 
+                    | #{livro.firstPublishData}
+                li 
+                    b Percentagem de gostos: 
+                    | #{livro.likedPercent}
+                li 
+                    b Pontuação BBE: 
+                    | #{livro.bbeScore}
+                li 
+                    b Votos BBE: 
+                    | #{livro.bbeVotes}
+                li 
+                    b Preço: 
+                    | #{livro.price}
+            
+            h6
+            b Géneros:
+            ul.w3-ul.w3-card-4(style="width:50%")
+
+                each genero in livro.genres
+                    li #{genero}
+
+            h6
+            b Personagens:
+            ul.w3-ul.w3-card-4(style="width:50%")
+
+                each personagem in livro.characters
+                    li #{personagem}
+
+            h6
+            b Prémios:
+            ul.w3-ul.w3-card-4(style="width:50%")
+
+                each premio in livro.awards
+                    li #{premio}
+
+            h6
+            b Avaliação por estrelas:
+            ul.w3-ul.w3-card-4(style="width:50%")
+
+                each rating in livro.ratingsByStars
+                    li #{rating}
+            
+            h6
+            b Definições:
+            ul.w3-ul.w3-card-4(style="width:50%")
+
+                each setting in livro.setting
+                    li #{setting}
+                
+

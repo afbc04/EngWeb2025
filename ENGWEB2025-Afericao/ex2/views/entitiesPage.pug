@@ -1,0 +1,41 @@
+extends layout 
+
+block content 
+    .w3-card-4 
+        header.w3-container.w3-red
+            h1 Autor #{autor._id}
+
+        .w3-container 
+            a.w3-button.w3-gray(href="/") Voltar
+
+            ul.w3-ul.w3-card-4(style="width:50%")
+
+                li 
+                    b ID: 
+                    | #{autor._id}
+                li 
+                    b Nome: 
+                    | #{autor.name}
+                li 
+                    b Número de Livros: 
+                    | #{autor.books_count}
+        h6
+
+        
+        table.w3-table-all 
+                tr
+                    th ID 
+                    th Título
+                    th Autor 
+                    th Data de Publicação 
+                    th Número de Páginas 
+                each livro in autor.books 
+                    tr 
+                        td
+                            a(href="/" + livro._id)=livro.bookId
+                        td= livro.title 
+                        td
+                            a(href="/entidades/" + autor._id)=autor.name
+                        td= livro.publishDate
+                        td= livro.pages
+
